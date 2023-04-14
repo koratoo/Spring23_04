@@ -32,11 +32,11 @@ public class SpringConfigClass implements WebApplicationInitializer{
 		
 		//======================================================================
 		//일반 Bean등록
-		AnnotationConfigWebApplicationContext rooAppContext=new AnnotationConfigWebApplicationContext();
-		rooAppContext.register(RootAppContext.class);
+		AnnotationConfigWebApplicationContext rootAppContext=new AnnotationConfigWebApplicationContext();
+		rootAppContext.register(RootAppContext.class);
 		
 		//listener 구현
-		ContextLoaderListener listener=new ContextLoaderListener(rooAppContext);
+		ContextLoaderListener listener=new ContextLoaderListener(rootAppContext);
 		servletContext.addListener(listener);
 		//filter 구현
 		FilterRegistration.Dynamic filter=servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);

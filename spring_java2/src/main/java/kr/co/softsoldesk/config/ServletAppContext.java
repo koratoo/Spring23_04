@@ -1,29 +1,42 @@
 package kr.co.softsoldesk.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@ComponentScan("kr.co.softsoldesk.controller")
-@EnableWebMvc//controller로 등록되어 있는 클래스 세팅
+@ComponentScan("kr.co.softsoldesk.controller") //스캔할 패키지
+@EnableWebMvc //Controller로 등록되어 있는 클래스 셋팅
 @Configuration
-public class ServletAppContext implements WebMvcConfigurer{//스캔할 패키지
+public class ServletAppContext implements WebMvcConfigurer{
 
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
-		//이미지 ,영상 ,소리 등 정적 파일 경로 매핑
+		// view 경로와 확장자 셋팅
 		WebMvcConfigurer.super.configureViewResolvers(registry);
-		registry.jsp("/WEB-INF/views/",".jsp");
+		registry.jsp("/WEB-INF/views/", ".jsp");
 	}
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		//view경로와 확장자 셋팅
+		// 이미지,영상, 소리 등 정적파일 경로 매핑
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 		registry.addResourceHandler("/**").addResourceLocations("/resources/");
 	}
-
+	
+	@Bean
+	ReloadableResourceBundleMessageSource messageSource() {
+		ReloadableResourceBundleMessageSource res=new ReloadableResourceBundleMessageSource();
+		
+		res.setBasename("/WEB-INF/properties/error_message");
+		
+		
+		return res;
+	}
+	
 
 }

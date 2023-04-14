@@ -4,13 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SessionBean</title>
+<title>input_success</title>
 </head>
 <body>
-     
-	<a href="input_data">input_data</a><br>
-	
-	
-    
+<h1>input_success</h1>
+
 </body>
 </html>
